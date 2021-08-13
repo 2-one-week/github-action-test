@@ -1,0 +1,15 @@
+
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "allowJs": true,
+      "noEmit": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strict": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true
+    }
+}
