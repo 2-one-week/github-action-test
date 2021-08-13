@@ -1,0 +1,4 @@
+{
+    "extends": "@financial/eslint-config-fe",
+    "rules": {}
+}
