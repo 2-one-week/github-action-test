@@ -1,0 +1,43 @@
+{
+  "name": "2021_summer_intern_hanju",
+  "version": "0.0.1",
+  "description": "2021 하계 인턴 과제 이한주 Repo입니다.",
+  "main": "index.js",
+  "scripts": {
+    "server:dev": "cd server && npm run start:dev",
+    "server:prod": "cd server && npm run start:prod",
+    "client:dev": "cd client && npm run dev",
+    "client:prod": "cd client && npm run build",
+    "check-types:server": "tsc --p ./server/tsconfig.json",
+    "check-types:client": "tsc --p ./client/tsconfig.json",
+    "lint:server": "cd server && npm run lint",
+    "lint:client": "cd client && npm run lint",
+    "test:server": "cd server && npm run test:clear && npm run test",
+    "test:client": "cd client && npm run test:clear && npm run test",
+    "postinstall": "husky install",
+    "precommit": "lint-staged",
+    "prepare": "husky install",
+    "all": "npm i && cd server && npm i && cd ../client && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://oss.navercorp.com/PayFE/2021_summer_intern_hanju.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --max-warnings=0"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run check-types:server && npm run check-types:client && npx lint-staged",
+      "pre-push": "npm run lint:server && npm run lint:client && npm run test:server && npm run test:client"
+    }
+  }
+}
