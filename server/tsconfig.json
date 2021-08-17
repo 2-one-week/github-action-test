@@ -1,0 +1,17 @@
+{
+    "extends": "../tsconfig",
+    "compilerOptions":{
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@shared/*" : ["src/shared/*"],
+            "@loader/*" : ["src/loader/*"],
+            "@entity/*" : ["src/entity/*"],
+            "@domain/*" : ["src/domain/*"],
+        }
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*.ts"]
+}
