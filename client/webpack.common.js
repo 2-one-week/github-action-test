@@ -8,8 +8,10 @@ const pathJoin = (targetPath) => path.join(__dirname, targetPath)
 module.exports = {
     mode: 'development',
     resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         alias: {
             '@': pathJoin('src'),
+            '@shared': pathJoin('src/shared'),
         },
     },
     entry: ['@babel/polyfill', pathJoin('src/index.tsx')],
