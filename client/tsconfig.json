@@ -1,6 +1,11 @@
 {
     "extends": "../tsconfig",
     "compilerOptions": {
+      "lib": [
+        "dom",
+        "es5",
+        "es2015.promise" 
+      ],
       "noEmit": false,
       "skipLibCheck": true,
       "esModuleInterop": true,
@@ -12,7 +17,8 @@
       "baseUrl": ".",
       "outDir": "./dist",
       "types": [
-        "@types/jest"
+        "@types/jest",
+        "@types/node"
       ],
       "paths": {
           "@/*": ["src/*"],
