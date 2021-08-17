@@ -14,10 +14,21 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14.x"
-      - name: Install Dependencies - Root / client / server
-        run: npm run all
-      - name: Check Lint
-        run: npm run lint
+      - name: Install Dependencies - root
+        run: npm install
+      - name: Install Dependencies - client
+        run: npm install
+        working-directory: client
+      - name: Check Client Lint
+        run: npm run lint:es
+        working-directory: client
+      - name: Install Dependencies - server
+        run: npm install
+        working-directory: server
+      - name: Check Server Lint
+        run: npm run lint:es
+        working-directory: server
+
   
   test:
     name: Test
@@ -29,14 +40,24 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14.x"
-      - name: Install Dependencies - Root / client / server
-        run: npm run all
+      - name: Install Dependencies - root
+        run: npm install
       - name: Type Check - client
         run: npm run check-types:client
       - name: Type Check - server
         run: npm run check-types:server
-      - name: Test - client / server
+      - name: Install Dependencies - client
+        run: npm install
+        working-directory: client
+      - name: Check Client Test
         run: npm run test
+        working-directory: client
+      - name: Install Dependencies - server
+        run: npm install
+        working-directory: server
+      - name: Check Server Test
+        run: npm run test
+        working-directory: server
         
   build:
     name: Build
@@ -48,7 +69,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14.x"
-      - name: Install Dependencies - Root / client / server
-        run: npm run all
+      - name: Install Dependencies - client
+        run: npm install
+        working-directory: client
       - name: Build JS And CSS
         run: npm run client:prod
