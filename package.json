@@ -10,10 +10,8 @@
     "client:prod": "cd client && npm run build",
     "check-types:server": "tsc --p ./server/tsconfig.json",
     "check-types:client": "tsc --p ./client/tsconfig.json",
-    "lint:server": "cd server && npm run lint",
-    "lint:client": "cd client && npm run lint",
-    "test:server": "cd server && npm run test:clear && npm run test",
-    "test:client": "cd client && npm run test:clear && npm run test",
+    "lint": "cd server && npm run lint:es && cd ../client && npm run lint:es",
+    "test": "cd server && npm run test:clear && npm run test && cd ../client && npm run test:clear && npm run test",
     "postinstall": "husky install",
     "precommit": "lint-staged",
     "prepare": "husky install",
@@ -27,17 +25,18 @@
   "license": "ISC",
   "devDependencies": {
     "husky": "^7.0.1",
-    "lint-staged": "^11.1.2"
+    "lint-staged": "^11.1.2",
+    "typescript": "^4.3.5"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
+    "*.{ts,tsx}": [
       "eslint --max-warnings=0"
     ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run check-types:server && npm run check-types:client && npx lint-staged",
-      "pre-push": "npm run lint:server && npm run lint:client && npm run test:server && npm run test:client"
+      "pre-push": "npm run lint && npm run test"
     }
   }
 }
