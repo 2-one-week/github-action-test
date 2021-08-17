@@ -6,7 +6,7 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, default]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
   
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, default]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,18 +31,16 @@ jobs:
           node-version: "14.x"
       - name: Install Dependencies - Root / client / server
         run: npm run all
-      - name: Test - client
-        run: npm run test:client
       - name: Type Check - client
         run: npm run check-types:client
-      - name: Test - server
-        run: npm run test:server
       - name: Type Check - server
         run: npm run check-types:server
+      - name: Test - client / server
+        run: npm run test
         
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, default]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
