@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  - push
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: Install Dependencies - Root / client / server
+        run: npm run all
+      - name: Check Lint
+        run: npm run lint
+  
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: Install Dependencies - Root / client / server
+        run: npm run all
+      - name: Test - client
+        run: npm run test:client
+      - name: Type Check - client
+        run: npm run check-types:client
+      - name: Test - server
+        run: npm run test:server
+      - name: Type Check - server
+        run: npm run check-types:server
+        
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: Install Dependencies - Root / client / server
+        run: npm run all
+      - name: Build JS And CSS
+        run: npm run client:prod
